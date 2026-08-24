@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hub",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/dev-server.js", "5173"],
+      "port": 5173
+    },
+    {
+      "name": "prototype-app",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "prototype-app", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}
