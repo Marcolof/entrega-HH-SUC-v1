@@ -384,8 +384,6 @@ export default function Home() {
               key={link.label}
               className={link.tag === 'actual' ? 'hub-nav-item current' : 'hub-nav-item'}
               href={link.href}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener' : undefined}
               onClick={(e) => { if (link.href === '#') e.preventDefault(); }}
             >
               <span>{link.label}</span>
