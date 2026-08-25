@@ -2,15 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "hub",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["tools/dev-server.js", "5173"],
-      "port": 5173
-    },
-    {
-      "name": "prototype-app",
+      "name": "entrega-hh-suc",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "prototype-app", "run", "dev"],
+      "runtimeArgs": ["run", "dev"],
       "port": 3000
     }
   ]

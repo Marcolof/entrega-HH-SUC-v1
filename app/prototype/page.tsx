@@ -6,27 +6,13 @@ type Step = 1 | 2 | 3 | 4;
 type DeliveryResult = 'entregada' | 'no-entregada' | '';
 type Page = 'entrega' | 'historial' | 'usuarios' | 'roles';
 
-// El hub vive en la URL principal del deploy. En local corre aparte con `node tools/dev-server.js`.
-const HUB_URL_PROD = 'https://entrega-hh-suc-v1.vercel.app';
-const HUB_URL_LOCAL = 'http://localhost:5173';
-
-function getHubUrl() {
-  if (typeof window !== 'undefined' && /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
-    return HUB_URL_LOCAL;
-  }
-  return HUB_URL_PROD;
-}
-
-function getHubLinks() {
-  const base = getHubUrl();
-  return [
-    { label: 'Centro del proyecto', href: `${base}/`, tag: null as 'actual' | 'pendiente' | null },
-    { label: 'Prototipo navegable', href: '#', tag: 'actual' as 'actual' | 'pendiente' | null },
-    { label: 'Flujo de navegación', href: `${base}/hub/flujo.html`, tag: 'pendiente' as 'actual' | 'pendiente' | null },
-    { label: 'Presentación', href: `${base}/hub/presentacion.html`, tag: 'pendiente' as 'actual' | 'pendiente' | null },
-    { label: 'Documentación', href: `${base}/hub/documentacion.html`, tag: 'pendiente' as 'actual' | 'pendiente' | null },
-  ];
-}
+const HUB_LINKS = [
+  { label: 'Centro del proyecto', href: '/', tag: null as 'actual' | 'pendiente' | null },
+  { label: 'Prototipo navegable', href: '#', tag: 'actual' as 'actual' | 'pendiente' | null },
+  { label: 'Flujo de navegación', href: '/flujo', tag: 'pendiente' as 'actual' | 'pendiente' | null },
+  { label: 'Presentación', href: '/presentacion', tag: 'pendiente' as 'actual' | 'pendiente' | null },
+  { label: 'Documentación', href: '/documentacion', tag: 'pendiente' as 'actual' | 'pendiente' | null },
+];
 
 const demoPiece = {
   code: 'CP-AR-008741925',
@@ -372,14 +358,12 @@ export default function Home() {
     roles: 'Roles y perfiles',
   };
 
-  const hubLinks = getHubLinks();
-
   const hubNav = (
     <div className="hub-nav">
       {hubNavOpen && (
         <div className="hub-nav-menu" role="menu">
           <p className="hub-nav-menu-title">Centro del proyecto</p>
-          {hubLinks.map((link) => (
+          {HUB_LINKS.map((link) => (
             <a
               key={link.label}
               className={link.tag === 'actual' ? 'hub-nav-item current' : 'hub-nav-item'}
