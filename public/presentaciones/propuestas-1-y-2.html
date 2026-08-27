@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Propuesta 1 vs. Propuesta 2 — Entrega HH SUC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --global-bg: #fafafa;
+    --color-brand: #ffce00;
+    --color-brand-dark: #152663;
+    --color-brand-dark-hover: #263b7f;
+    --color-success: #10b981;
+    --color-danger: #e11d48;
+    --gray-100: #f2f2f2;
+    --gray-200: #eeeeee;
+    --gray-900: #191919;
+    --border-card: #dfe3ea;
+    --text-primary: #191919;
+    --text-muted: #49454f;
+    --text-subtle: #79747e;
+    --font-family-base: "Ubuntu", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-weight-min: 500;
+    --radius-md: 10px;
+    --radius-lg: 15px;
+    --radius-pill: 32px;
+    --shadow-card: 0 2px 8px rgba(21, 38, 99, .04);
+    --transition-base: .2s ease-in-out;
+  }
+
+  html { height: 100%; background: var(--global-bg); }
+  body {
+    height: 100%; margin: 0;
+    display: flex; flex-direction: column; overflow: hidden;
+    font-family: var(--font-family-base); font-weight: var(--font-weight-min);
+    font-size: 14px; line-height: 1.5; color: var(--text-primary);
+    background: var(--global-bg);
+    font-synthesis: none; -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, p { margin-top: 0; }
+  .lucide-icon { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- Escenario ---------- */
+  .deck-stage { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 14px 20px; }
+  .deck { max-width: 1360px; width: 100%; height: 100%; position: relative; margin: 0 auto; }
+
+  .slide {
+    display: none; position: relative; width: 100%; height: 100%; margin: 0;
+    padding: 40px 44px;
+    border: 1px solid var(--border-card); border-radius: var(--radius-lg);
+    background: #fff; box-shadow: var(--shadow-card);
+    overflow-y: auto; box-sizing: border-box;
+  }
+  .slide.is-active { display: flex; flex-direction: column; justify-content: flex-start; }
+  .slide h2 { font-size: 1.85rem; font-weight: 700; margin-bottom: 10px; }
+  .slide h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .slide p { color: var(--text-muted); max-width: 720px; font-size: 1rem; }
+
+  .slide-eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; padding: 5px 14px; border-radius: var(--radius-pill); background: var(--gray-100); color: var(--color-brand-dark); font-size: .8125rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+
+  /* ---------- Volver al hub ---------- */
+  .slide-back {
+    display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto;
+    padding: .5rem 1rem; border-radius: var(--radius-pill); border: 0;
+    font-family: var(--font-family-base); font-size: .9375rem; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+  }
+  .slide-back:hover { opacity: .82; }
+  .slide-back .lucide-icon { width: 16px; height: 16px; }
+  .slide-back--light { position: absolute; top: 20px; right: 20px; z-index: 5; background: #fff; color: var(--color-brand-dark); box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+  .cover-slide .slide-back--light { background: rgba(255,255,255,.95); }
+  .slide-back--band { margin-left: auto; background: var(--color-brand-dark); color: #fff; }
+  .slide-back--outline { position: absolute; top: 20px; right: 20px; z-index: 5; background: #fff; color: var(--color-brand-dark); border: 1px solid var(--border-card); }
+  .slide-back--outline:hover { background: var(--gray-100); opacity: 1; }
+
+  /* ---------- Tipo 1 · Portada / divider ---------- */
+  .cover-slide { padding: 0; background: var(--color-brand-dark); border-color: var(--color-brand-dark); overflow: hidden; }
+  .cover-slide.is-active { flex-direction: row; align-items: stretch; justify-content: flex-start; }
+  .cover-slide__bar { flex: 0 0 16px; background: var(--color-brand); }
+  .cover-slide__content { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: 56px 64px; }
+  .cover-eyebrow { display: block; margin-bottom: 18px; color: var(--color-brand); font-size: .9375rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .cover-title { margin: 0 0 16px; font-size: 3rem; font-weight: 700; color: #fff; line-height: 1.15; }
+  .cover-slide p.cover-subtitle { margin: 0; max-width: 640px; font-size: 1.25rem; font-weight: 600; color: #c7d0ea; }
+  .cover-slide .crumb { margin-top: 30px; }
+  .crumb { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 1.0625rem; font-weight: 700; }
+  .crumb span:not(.crumb-sep) { padding: 6px 14px; border-radius: var(--radius-pill); background: rgba(255,255,255,.12); color: #fff; }
+  .crumb-sep { color: var(--color-brand); opacity: .8; }
+
+  /* ---------- Tipo 2 y 3 · Header amarillo con franja navy ---------- */
+  .screen-slide-wrap { padding: 0; }
+  .screen-slide-wrap.is-active { flex-direction: column; justify-content: flex-start; }
+  .screen-topbar { flex: 0 0 auto; }
+  .screen-topbar__stripe { height: 6px; background: var(--color-brand-dark); }
+  .screen-topbar__band { display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 40px; background: var(--color-brand); }
+  .screen-topbar__logo { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--color-brand-dark); font-size: 10px; font-weight: 800; color: var(--color-brand-dark); flex: 0 0 auto; }
+  .screen-topbar__label { font-size: 1.1875rem; font-weight: 700; color: var(--color-brand-dark); }
+
+  .screen-slide-body { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; padding: 26px 40px; overflow-y: auto; }
+  .screen-slide-body .screen-slide { width: 100%; }
+  .plain-body { flex: 1 1 auto; min-height: 0; padding: 32px 40px; overflow-y: auto; }
+
+  .screen-slide { display: grid; grid-template-columns: minmax(230px, 290px) 1fr; gap: 34px; align-items: center; }
+  .screen-slide.reverse { grid-template-columns: 1fr minmax(230px, 290px); }
+  .screen-slide.reverse .screen-text { order: 2; }
+  .screen-slide.reverse .screen-frame-wrap { order: 1; }
+  .screen-slide > * { min-width: 0; }
+  .screen-text h2 { font-size: 1.45rem; }
+  .screen-text p { font-size: .9375rem; }
+  .screen-text ul { margin: 14px 0 0; padding-left: 18px; color: var(--text-muted); font-size: .9375rem; line-height: 1.75; }
+  .screen-text ul li strong { color: var(--text-primary); }
+
+  .role-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 5px 12px; border-radius: var(--radius-pill); font-size: .875rem; font-weight: 700; }
+  .role-tag--operador { background: #e7edfb; color: #2563d9; }
+  .role-tag--admin { background: #f6e8f4; color: #a02b93; }
+  .role-tag--supervisor { background: #e5f6fc; color: #0f9ed5; }
+
+  /* ---------- Captura estática / en vivo 1440x900 ---------- */
+  .screen-frame-wrap { display: flex; justify-content: center; min-width: 0; width: 100%; }
+  .screen-frame {
+    width: 100%; max-width: 980px; max-height: 613px; aspect-ratio: 1440 / 900;
+    border-radius: var(--radius-md); border: 6px solid var(--gray-900);
+    background: #fff; overflow: hidden;
+    box-shadow: 0 18px 40px rgba(21,38,99,.18);
+  }
+  .screen-frame iframe { width: 1440px; height: 900px; transform: scale(var(--frame-scale, .5556)); transform-origin: top left; border: 0; pointer-events: none; }
+
+  /* ---------- Layouts de contenido plano ---------- */
+  .obj-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: start; }
+  .obj-list { display: flex; flex-direction: column; gap: 10px; }
+  .obj-list span { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: var(--radius-md); background: var(--gray-100); font-weight: 700; font-size: .9375rem; color: var(--color-brand-dark); }
+  .obj-list span::before { content: "✓"; color: var(--color-success); font-weight: 700; }
+
+  .steps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; margin-top: 22px; }
+  .step-card { padding: 20px; border-radius: var(--radius-md); background: var(--gray-100); }
+  .step-card b { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-bottom: 12px; border-radius: 50%; background: var(--color-brand); color: var(--color-brand-dark); font-size: 1rem; }
+  .step-card strong { display: block; margin-bottom: 4px; font-size: 1.0625rem; color: var(--text-primary); }
+  .step-card p { margin: 0; font-size: .9375rem; color: var(--text-muted); }
+
+  /* ---------- Específico de este deck: comparación de propuestas ---------- */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .compare-col { padding: 22px; border-radius: var(--radius-md); background: var(--gray-100); }
+  .compare-col h3 { margin-bottom: 4px; }
+  .compare-col .compare-sub { display: block; margin-bottom: 16px; font-size: .8125rem; font-weight: 700; color: var(--text-subtle); text-transform: uppercase; letter-spacing: .04em; }
+  .compare-list { display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; list-style: none; }
+  .compare-list li { display: flex; align-items: flex-start; gap: 9px; font-size: .9375rem; line-height: 1.5; color: var(--text-primary); }
+  .compare-list li::before { flex: 0 0 auto; font-weight: 800; margin-top: 1px; }
+  .compare-list.pros li::before { content: "✓"; color: var(--color-success); }
+  .compare-list.cons li::before { content: "✕"; color: var(--color-danger); }
+
+  /* ---------- Diagrama de flujo (propio de este deck) ---------- */
+  .flow-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 24px; }
+  .flow-step { flex: 1 1 150px; min-width: 140px; padding: 16px; border-radius: var(--radius-md); background: var(--gray-100); border: 1px solid var(--border-card); text-align: center; }
+  .flow-step strong { display: block; font-size: .9375rem; color: var(--color-brand-dark); margin-bottom: 3px; }
+  .flow-step span { font-size: .8125rem; color: var(--text-muted); }
+  .flow-step.new { background: #fff7d6; border-color: var(--color-brand); }
+  .flow-arrow { flex: 0 0 auto; width: 22px; height: 22px; color: var(--text-subtle); }
+  .flow-branch { margin-top: 16px; padding: 14px 18px; border-radius: var(--radius-md); border: 1px dashed var(--border-card); font-size: .875rem; color: var(--text-muted); }
+  .flow-branch strong { color: var(--text-primary); }
+
+  .pill-note { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 10px 16px; border-radius: var(--radius-md); background: #fff7d6; border: 1px solid var(--color-brand); font-size: .875rem; font-weight: 700; color: var(--color-brand-dark); }
+
+  /* ---------- Footer de navegación ---------- */
+  .deck-progress { flex: 0 0 auto; height: 3px; background: var(--gray-200); }
+  .deck-progress__bar { height: 100%; background: var(--color-brand); transition: width .25s ease; }
+
+  .deck-nav { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; gap: 22px; padding: 14px 20px; border-top: 1px solid var(--border-card); background: #fff; }
+  .deck-nav__btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 42px; padding: .6rem 1.2rem;
+    border: 1px solid var(--border-card); border-radius: var(--radius-pill);
+    background: #fff; color: var(--color-brand-dark);
+    font-family: var(--font-family-base); font-size: .875rem; font-weight: 700;
+    cursor: pointer; transition: background-color var(--transition-base), border-color var(--transition-base), opacity var(--transition-base);
+  }
+  .deck-nav__btn:hover:not(:disabled) { background: var(--gray-100); border-color: var(--color-brand-dark); }
+  .deck-nav__btn:disabled { opacity: .35; cursor: not-allowed; }
+  .deck-nav__btn .lucide-icon { width: 18px; height: 18px; }
+  .deck-nav__btn--next { background: var(--color-brand-dark); border-color: var(--color-brand-dark); color: #fff; }
+  .deck-nav__btn--next:hover:not(:disabled) { background: var(--color-brand-dark-hover); border-color: var(--color-brand-dark-hover); }
+  .deck-nav__counter { min-width: 64px; text-align: center; font-size: .8125rem; font-weight: 700; color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .deck-stage { padding: 14px 16px; }
+    .slide { padding: 28px 22px; border-radius: var(--radius-md); }
+    .slide:not(.cover-slide):not(.screen-slide-wrap) { padding-top: 68px; }
+    .cover-slide__content { padding: 40px 28px; }
+    .cover-title { font-size: 2rem; }
+    .screen-topbar__band { padding: 0 20px; height: 48px; }
+    .screen-slide-body { padding: 18px 20px; }
+    .plain-body { padding: 22px 20px; }
+    .obj-grid, .screen-slide, .screen-slide.reverse, .compare-grid { grid-template-columns: 1fr; }
+    .screen-slide.reverse .screen-text, .screen-slide.reverse .screen-frame-wrap { order: initial; }
+    .screen-frame { max-height: none; max-width: calc(44vh * 1.6); }
+    .flow-diagram { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+    .deck-nav { gap: 12px; padding: 12px 14px; }
+    .deck-nav__btn span.btn-label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="deck-stage">
+   <div class="deck" id="deck">
+
+    <!-- 1 · PORTADA -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">Entrega HH SUC · Documentación</span>
+        <h1 class="cover-title">Propuesta 1 vs. Propuesta 2</h1>
+        <p class="cover-subtitle">Dos caminos posibles para la entrega de piezas en sucursal, en igualdad de jerarquía: ninguno está descartado todavía.</p>
+        <div class="crumb">
+          <span>Contexto</span><span class="crumb-sep">›</span>
+          <span>Propuesta 1</span><span class="crumb-sep">›</span>
+          <span>Propuesta 2</span><span class="crumb-sep">›</span>
+          <span>Comparación</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · OBJETIVO -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Objetivo</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Objetivo de esta presentación</span>
+        <div class="obj-grid">
+          <div>
+            <h2>Qué recorre este instructivo</h2>
+            <p>Este recorrido compara las dos propuestas documentadas en <strong>"Dos ideas como propuestas"</strong> y el diagrama de proceso de referencia, sin dar ninguna por elegida.</p>
+          </div>
+          <div class="obj-list">
+            <span>Contexto del cambio</span>
+            <span>Propuesta 1 — Usuario nominal</span>
+            <span>Propuesta 2 — Usuarios genéricos</span>
+            <span>Diagrama de flujo</span>
+            <span>Ventajas y desventajas</span>
+            <span>Preguntas abiertas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · EL RECORRIDO -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Recorrido</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Estructura</span>
+        <h2>Cómo está organizada</h2>
+        <p>Seis bloques, del contexto a las preguntas que todavía faltan resolver.</p>
+        <div class="steps-row">
+          <div class="step-card"><b>1</b><strong>Contexto</strong><p>Por qué se plantea el cambio.</p></div>
+          <div class="step-card"><b>2</b><strong>Propuesta 1</strong><p>App web, usuario nominal.</p></div>
+          <div class="step-card"><b>3</b><strong>Propuesta 2</strong><p>Usuarios genéricos por sucursal.</p></div>
+          <div class="step-card"><b>4</b><strong>Diagrama de flujo</strong><p>Cómo opera la Propuesta 2 hoy.</p></div>
+          <div class="step-card"><b>5</b><strong>Comparación</strong><p>Ventajas y desventajas de cada una.</p></div>
+          <div class="step-card"><b>6</b><strong>Preguntas abiertas</strong><p>Lo que falta definir.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · DIVIDER: CONTEXTO -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">01</span>
+        <h1 class="cover-title">Contexto</h1>
+        <p class="cover-subtitle">Por qué se está evaluando cambiar la forma de entregar piezas en sucursal.</p>
+      </div>
+    </section>
+
+    <!-- 5 · CONTEXTO -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Situación actual</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Motivación del cambio</span>
+        <div class="obj-grid">
+          <div>
+            <h2>La gestión hoy se hace en dos sistemas</h2>
+            <p>La entrega se registra bajo un usuario genérico que no permite identificar al operador. Si se declara una gestión con HH que no se hizo, la novedad no llega a Track&amp;Trace y la pieza queda sin gestión de entrega.</p>
+            <p style="margin-top:14px; font-size: .875rem;">Esta motivación proviene de un documento de la etapa inicial del proceso, hoy <strong>deprecado</strong> como fuente de verdad. No se usa para derivar requisitos, pero sigue siendo la mejor explicación disponible del problema de negocio.</p>
+          </div>
+          <div class="obj-list">
+            <span>Doble proceso, dos sistemas</span>
+            <span>Sin trazabilidad individual</span>
+            <span>Errores sin detección</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · DIVIDER: PROPUESTA 1 -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">02</span>
+        <h1 class="cover-title">Propuesta 1</h1>
+        <p class="cover-subtitle">Aplicación web para PC o Tablet, con identificación individual del operador.</p>
+      </div>
+    </section>
+
+    <!-- 7 · PROPUESTA 1: CAPTURA LOGIN -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Login</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="screen-slide-body">
+        <div class="screen-slide">
+          <div class="screen-text">
+            <span class="slide-eyebrow">Paso 1 · Identificación</span>
+            <h2>Usuario y contraseña nominales</h2>
+            <p>El operador ingresa con su cuenta individual, no con un usuario compartido de sucursal.</p>
+            <ul>
+              <li>Cada gestión queda <strong>atribuida a una persona</strong>.</li>
+              <li>Requiere <strong>ABM de usuarios</strong> con unidad de negocio.</li>
+              <li>Requiere <strong>ABM de roles y perfiles</strong>.</li>
+            </ul>
+            <span class="role-tag role-tag--operador">Operador</span>
+          </div>
+          <div class="screen-frame-wrap">
+            <div class="screen-frame"><iframe src="/prototype" title="Login del prototipo — Propuesta 1"></iframe></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · PROPUESTA 1: LOS 6 PASOS -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Proceso</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Los 6 pasos de la Propuesta 1</span>
+        <h2>De la credencial al RDU</h2>
+        <div class="steps-row">
+          <div class="step-card"><b>1</b><strong>Ingreso</strong><p>Con credenciales individuales.</p></div>
+          <div class="step-card"><b>2</b><strong>Pieza</strong><p>Se ingresa y se abre el formulario.</p></div>
+          <div class="step-card"><b>3</b><strong>Evidencias</strong><p>Foto, firma y texto.</p></div>
+          <div class="step-card"><b>4</b><strong>Envío</strong><p>Se completa y se envía.</p></div>
+          <div class="step-card"><b>5</b><strong>T&amp;T</strong><p>Se genera el estado de entrega.</p></div>
+          <div class="step-card"><b>6</b><strong>RDU</strong><p>Se genera como el actual.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 · PROPUESTA 1: PRECONDICIONES -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Precondiciones</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Qué hace falta antes de operar</span>
+        <div class="obj-grid">
+          <div>
+            <h2>Precondiciones y prerrequisitos</h2>
+            <p>La propuesta exige infraestructura de administración antes de poder usarse, y depende de hardware y conectividad en cada puesto.</p>
+          </div>
+          <div class="obj-list">
+            <span>ABM de usuarios por unidad de negocio</span>
+            <span>ABM de roles y perfiles</span>
+            <span>Cámara y colector de firma</span>
+            <span>Conectividad permanente</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · DIVIDER: PROPUESTA 2 -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">03</span>
+        <h1 class="cover-title">Propuesta 2</h1>
+        <p class="cover-subtitle">Usuarios genéricos múltiples por unidad de negocio, sobre el dispositivo móvil actual.</p>
+      </div>
+    </section>
+
+    <!-- 11 · PROPUESTA 2: DIAGRAMA DE FLUJO -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Diagrama de flujo</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">"El proceso sería el mismo al actual"</span>
+        <h2>Cómo opera hoy, según el diagrama de referencia</h2>
+        <p>La Propuesta 2 declara que replica el proceso actual. El diagrama del proceso tentativo documenta exactamente esa mecánica.</p>
+        <div class="flow-diagram">
+          <div class="flow-step"><strong>P80 recibido</strong><span>por unidad de negocio</span></div>
+          <svg class="flow-arrow lucide-icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <div class="flow-step"><strong>Se envían N tareas</strong><span>una por usuario genérico</span></div>
+          <svg class="flow-arrow lucide-icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <div class="flow-step"><strong>Un usuario se loguea</strong><span>bajan todas las tareas</span></div>
+          <svg class="flow-arrow lucide-icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <div class="flow-step"><strong>Gestiona y envía</strong><span>una tarea puntual</span></div>
+          <svg class="flow-arrow lucide-icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <div class="flow-step new"><strong>Anula las otras N-1</strong><span>proceso nuevo, obligatorio</span></div>
+        </div>
+        <div class="flow-branch"><strong>Bifurcación del diagrama:</strong> tras confirmar la entrega, ¿se envía novedad de baja de stock? El diagrama contempla ambas ramas; la regla que decide cuándo aplica cada una no está definida.</div>
+        <span class="pill-note">⚠ El diagrama está rotulado "PROCESO TENTATIVO": describe intención de proceso, no reglas confirmadas.</span>
+      </div>
+    </section>
+
+    <!-- 12 · PROPUESTA 2: PRECONDICIONES Y LIMITANTES -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Condiciones</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Sin hardware nuevo, con riesgos propios</span>
+        <div class="obj-grid">
+          <div>
+            <h2>Qué exige y qué reconoce como limitante</h2>
+            <p>No requiere comprar equipamiento: reutiliza los dispositivos móviles existentes y trabaja offline. A cambio, el propio documento fuente declara seis limitantes — ninguna beneficio.</p>
+          </div>
+          <div class="obj-list">
+            <span>Reutiliza dispositivos móviles (HH)</span>
+            <span>No depende de conectividad permanente</span>
+            <span>Mismo proceso que ya conoce el operador</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · DIVIDER: COMPARACIÓN -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">04</span>
+        <h1 class="cover-title">Comparación</h1>
+        <p class="cover-subtitle">Ventajas y desventajas de cada propuesta, en sus propios términos.</p>
+      </div>
+    </section>
+
+    <!-- 14 · COMPARACIÓN VENTAJAS/DESVENTAJAS -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Ventajas y desventajas</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Cara a cara</span>
+        <h2>Ninguna es gratis</h2>
+        <div class="compare-grid">
+          <div class="compare-col">
+            <h3>Propuesta 1</h3>
+            <span class="compare-sub">Usuario nominal</span>
+            <ul class="compare-list pros">
+              <li>Trazabilidad individual completa</li>
+              <li>Sin riesgo de doble entrega</li>
+              <li>En línea con T&amp;T, sin tareas pendientes</li>
+            </ul>
+            <ul class="compare-list cons" style="margin-top:14px;">
+              <li>Requiere comprar cámara y colector de firma</li>
+              <li>Depende de conectividad total</li>
+              <li>Falla de integración post-confirmación sin definir</li>
+            </ul>
+          </div>
+          <div class="compare-col">
+            <h3>Propuesta 2</h3>
+            <span class="compare-sub">Usuarios genéricos</span>
+            <ul class="compare-list pros">
+              <li>Sin inversión en hardware nuevo</li>
+              <li>Opera sin conexión permanente</li>
+              <li>Menor cambio para el operador</li>
+            </ul>
+            <ul class="compare-list cons" style="margin-top:14px;">
+              <li>Sin visibilidad de quién hizo la tarea</li>
+              <li>Riesgo de doble entrega del mismo envío</li>
+              <li>Proceso más complejo (anulación de tareas)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · PREGUNTAS ABIERTAS -->
+    <section class="slide screen-slide-wrap">
+      <div class="screen-topbar">
+        <div class="screen-topbar__stripe"></div>
+        <div class="screen-topbar__band">
+          <span class="screen-topbar__logo">CA</span>
+          <span class="screen-topbar__label">Preguntas abiertas</span>
+          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+        </div>
+      </div>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Lo que todavía no está resuelto</span>
+        <h2>Qué falta definir antes de decidir</h2>
+        <div class="steps-row">
+          <div class="step-card"><b>?</b><strong>Asimetría</strong><p>La Propuesta 1 tiene prototipo navegable; la 2 solo existe en papel.</p></div>
+          <div class="step-card"><b>?</b><strong>Mosaic</strong><p>Solo lo sostiene el documento deprecado.</p></div>
+          <div class="step-card"><b>?</b><strong>Historial y Supervisor</strong><p>Ninguna propuesta los menciona.</p></div>
+          <div class="step-card"><b>?</b><strong>Baja de stock</strong><p>Cuándo se envía la novedad y cuándo no.</p></div>
+          <div class="step-card"><b>?</b><strong>Devolución</strong><p>Si el circuito entra en el alcance de alguna.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · CIERRE -->
+    <section class="slide cover-slide">
+      <a class="slide-back slide-back--light" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
+      <div class="cover-slide__bar"></div>
+      <div class="cover-slide__content">
+        <span class="cover-eyebrow">Cierre</span>
+        <h1 class="cover-title">Dos propuestas, una decisión pendiente</h1>
+        <p class="cover-subtitle">La Propuesta 1 ya tiene un prototipo navegable. La Propuesta 2 tiene el proceso mejor documentado. Ninguna está descartada.</p>
+        <div class="crumb">
+          <span>Entrega HH SUC</span><span class="crumb-sep">›</span>
+          <span>Correo Argentino</span>
+        </div>
+      </div>
+    </section>
+
+   </div>
+  </main>
+
+  <div class="deck-progress"><div class="deck-progress__bar" id="progressBar"></div></div>
+  <nav class="deck-nav">
+    <button type="button" class="deck-nav__btn" id="prevBtn" aria-label="Slide anterior">
+      <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="btn-label">Anterior</span>
+    </button>
+    <div class="deck-nav__counter"><span id="slideCurrent">1</span> / <span id="slideTotal">1</span></div>
+    <button type="button" class="deck-nav__btn deck-nav__btn--next" id="nextBtn" aria-label="Siguiente slide">
+      <span class="btn-label">Siguiente</span>
+      <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </nav>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll('#deck .slide'));
+      const total = slides.length;
+      const currentEl = document.getElementById('slideCurrent');
+      const totalEl = document.getElementById('slideTotal');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const progressBar = document.getElementById('progressBar');
+      totalEl.textContent = total;
+
+      let index = Math.min(Math.max(parseInt((location.hash || '').replace('#', ''), 10) - 1 || 0, 0), total - 1);
+
+      function syncFrameScale() {
+        const active = slides[index];
+        active.querySelectorAll('.screen-frame').forEach(frame => {
+          const iframe = frame.querySelector('iframe');
+          if (!iframe || !frame.clientWidth) return;
+          iframe.style.transform = "scale(" + (frame.clientWidth / 1440) + ")";
+        });
+      }
+      function scheduleFrameSync() {
+        requestAnimationFrame(() => requestAnimationFrame(syncFrameScale));
+        setTimeout(syncFrameScale, 60);
+      }
+
+      function render() {
+        slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+        currentEl.textContent = index + 1;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === total - 1;
+        progressBar.style.width = ((index + 1) / total * 100) + '%';
+        history.replaceState(null, '', '#' + (index + 1));
+        slides[index].scrollTop = 0;
+        scheduleFrameSync();
+      }
+
+      function go(delta) {
+        const next = index + delta;
+        if (next < 0 || next >= total) return;
+        index = next;
+        render();
+      }
+
+      window.addEventListener('resize', () => scheduleFrameSync());
+      prevBtn.addEventListener('click', () => go(-1));
+      nextBtn.addEventListener('click', () => go(1));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+      });
+
+      let touchX = null;
+      const stage = document.querySelector('.deck-stage');
+      stage.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', e => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+        touchX = null;
+      }, { passive: true });
+
+      render();
+    })();
+  </script>
+
+</body>
+</html>

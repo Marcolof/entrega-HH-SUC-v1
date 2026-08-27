@@ -1,5 +1,5 @@
 schema_version: "0.1"
-last_updated: "2026-08-26"
+last_updated: "2026-08-27"
 
 project:
   name: "Entrega HH SUC"
@@ -8,56 +8,59 @@ project:
   local_root: "."
 
 strategy:
-  current_focus: "Panel de prueba incorporado. Falta que el area usuaria valide dispositivo objetivo y rol Supervisor"
+  current_focus: "Hub con 3 de 4 modulos disponibles: prototipo, documentacion y presentacion. Falta /flujo"
   intervention: reuse-existing
   recommended_next:
-    - "Llevar a validacion del negocio: dispositivo objetivo (escritorio vs mobile web app) usando el panel de prueba del propio wireframe"
-    - "Hacer visible en el prototipo el valor central del GC01: una sola gestion en lugar de dos sistemas"
-    - "Actualizar la spec openspec login-y-roles: quedo desactualizada por el cambio de rol sin cerrar sesion"
+    - "Resolver la mencion a Mosaic en el prototipo (solo la sostiene el GC01 deprecado)"
+    - "Construir /flujo con el diagrama real de pantallas/roles (unico modulo pendiente del Hub)"
+    - "Definir si la asimetria P1-con-prototipo / P2-sin-prototipo se resuelve construyendo un prototipo de P2, o se deja explicita como esta"
   deferred:
-    - "Modulos /flujo, /presentacion, /documentacion del Hub (placeholders, sin contenido)"
+    - "Modulo /flujo del Hub (placeholder, sin contenido)"
     - "Documentar en OpenSpec el flujo de entrega, historial y ABM (solo existe login-y-roles)"
     - "Reglas de baja de stock, P80 y devolucion: dependen de definicion del negocio"
 
 knowledge:
   confirmed:
-    - "Se adopto la Propuesta 1: aplicacion web con credenciales personales, en linea, con foto y firma digital"
-    - "Propuesta 1 exige como precondicion ABM de usuarios con asignacion a unidad de negocio y ABM de roles y perfiles: ambos estan implementados en el prototipo"
-    - "El problema de negocio central del GC01 es la falta de trazabilidad (usuario generico) y el doble proceso en dos sistemas"
-    - "Los 6 pasos del proceso de Propuesta 1 estan representados en el prototipo, con T&T/Mosaic y RDU como integraciones simuladas"
-    - "El diagrama de referencia (docs/image.png) esta rotulado PROCESO TENTATIVO, por lo tanto no es fuente autoritativa de reglas de negocio"
+    - "DECISION: Propuestas 1 y 2 quedan en igualdad de jerarquia. Ninguna esta descartada y ambas se presentan"
+    - "El GC01 esta deprecado, no eliminado: no se derivan requisitos de el, pero se consulta para explicar huecos de P1 y P2"
+    - "El prototipo es la Propuesta 1 materializada: cobertura completa de sus 6 pasos y sus 2 precondiciones"
+    - "Propuesta 1 exige como precondicion ABM de usuarios con asignacion a unidad de negocio y ABM de roles y perfiles: ambos estan implementados"
+    - "El diagrama image.png documenta la mecanica de la Propuesta 2 (usuario generico, tareas, P80), porque esa propuesta declara 'el proceso seria el mismo al actual'"
+    - "Al deprecar el GC01 se disuelve la contradiccion de dispositivo: cada propuesta trae el suyo (P1 = PC/Tablet, P2 = movil HH)"
+    - "El documento fuente no es neutral: a P1 le da beneficios y cero limitantes, a P2 seis limitantes y cero beneficios"
   assumptions:
-    - "El modulo Historial es un agregado del equipo de diseno: no aparece en Propuesta 1 ni en el GC01"
-    - "El ingreso de la pieza se resolvio como codigo manual; Propuesta 1 solo dice 'ingresa la pieza' sin definir el medio"
-    - "El rol Supervisor es una decision de diseno para demostrar permisos configurables, no un requisito de las fuentes. Documentado como tal en functional-analysis.md"
+    - "El modulo Historial es un agregado del equipo de diseno: no aparece en ninguna de las dos propuestas"
+    - "El ingreso de la pieza se resolvio como codigo manual; la fuente no define el medio"
+    - "El rol Supervisor es una decision de diseno, no un requisito de las fuentes"
   open_questions:
-    - "GC01 se titula 'con Dispositivos Moviles' pero Propuesta 1 propone PC o Tablet. Que dispositivo es el objetivo real? El wireframe ahora permite recorrer ambos modos para poder decidirlo con evidencia"
-    - "Confirma el area usuaria el rol Supervisor como tercer rol?"
-    - "Cuando se envia la novedad de baja de stock y cuando no (el diagrama tiene esa bifurcacion, el wireframe no)"
-    - "Que evento habilita una pieza para entrega: P80 u otro estado"
-    - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) no esta modelado en el wireframe"
+    - "Asimetria de materializacion: P1 tiene prototipo navegable y P2 solo documento. Presentarlas como iguales inclina la decision por disponibilidad, no por merito. Se equilibra en la Presentacion?"
+    - "Se confirma o se retira la mencion a Mosaic en el prototipo?"
+    - "Historial y Supervisor quedan dentro del alcance aceptado? Ninguna propuesta los menciona"
+    - "Cuando se envia la novedad de baja de stock y cuando no (bifurcacion del diagrama, aplica a P2)"
+    - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) entra en el alcance de alguna propuesta?"
 
 sources:
   - type: docx
-    path: "../docs/GC01-Entrega con HH SUC V2 (1).docx"
-    role: "Pedido de cambio formal. Define el problema de negocio, sistemas impactados y prioridad"
-    authority: high
-    date: "2026-07-20"
-  - type: docx
     path: "../docs/Dos ideas como propuestas  (2).docx"
-    role: "Dos alternativas de solucion. Propuesta 1 es la adoptada"
+    role: "FUENTE DE VERDAD PRINCIPAL. Dos alternativas de solucion"
     authority: high
     date: unknown
+    note: "No es neutral: califica a Propuesta 1 como 'la mas factible', le da beneficios y ninguna limitante; a Propuesta 2 le da seis limitantes y ningun beneficio"
   - type: image
     path: "../docs/image.png"
-    role: "Diagrama del proceso tentativo previo (usuario generico + dispositivo movil)"
-    authority: medium
-    note: "Rotulado PROCESO TENTATIVO: describe el estado previo, no el objetivo"
+    role: "FUENTE DE VERDAD. Diagrama del proceso tentativo. Funciona como vista de proceso de la Propuesta 2"
+    authority: high
+    note: "Rotulado PROCESO TENTATIVO: sus ramas son intencion de proceso, no reglas confirmadas"
+  - type: docx
+    path: "../docs/GC01-Entrega con HH SUC V2 (1).docx"
+    role: "DEPRECADO, no eliminado. Etapa inicial del proceso. No se usa para derivar requisitos, pero se consulta para explicar huecos de P1 y P2"
+    authority: deprecated
+    date: "2026-07-20"
+    note: "Unica fuente de: motivacion del cambio, doble proceso actual, pasividad de errores, alcance 'toda oficina', y Mosaic. Ver reporte-impacto seccion 1.5"
   - type: markdown
     path: "Documents/functional-analysis.md"
-    role: "Analisis funcional elaborado por el equipo a partir de las fuentes anteriores"
+    role: "Analisis funcional del equipo. En revision tras el reencuadre de fuentes"
     authority: medium
-    note: "Contiene una contradiccion con el prototipo respecto del rol Supervisor"
 
 capabilities:
   prototype: "next.js app router en app/prototype"
@@ -67,17 +70,29 @@ capabilities:
 
 artifacts:
   hub:
-    status: draft
+    status: review
     path: "app/page.tsx"
-    note: "4 tarjetas; solo Prototipo navegable tiene contenido real"
+    note: "4 tarjetas; Prototipo (Propuesta 1), Documentacion y Presentacion disponibles. Solo Flujo sigue placeholder"
+  presentation:
+    status: review
+    path: "app/presentacion/ (selector Next.js) + public/presentaciones/propuestas-1-y-2.html (deck autocontenido)"
+    note: "16 slides, estilo propio (navy #152663 / amarillo #FFCE00 / Ubuntu) extraido del pptx de referencia del usuario. Captura del login via iframe en vivo a /prototype (no screenshot estatico). Selector preparado para futuras presentaciones"
   prototype:
     status: review
     fidelity: wireframe
     path: "app/prototype/page.tsx"
     note: "Incluye panel de prueba (esquina inferior derecha): volver al hub, cambiar tipo de usuario y alternar escritorio / responsive"
   documentation:
-    status: draft
+    status: review
     path: "Documents/"
+    note: "Propuestas 1 y 2 + reporte de impacto, navegables en /documentacion (renderizado desde los .md)"
+  proposals:
+    status: review
+    path: "Documents/propuesta-1-aplicacion-web-nominal.md, Documents/propuesta-2-usuarios-genericos.md"
+    sources: "docs/Dos ideas como propuestas (2).docx, docs/image.png"
+  impact_report:
+    status: review
+    path: "Documents/reporte-impacto-propuestas.md"
   specs:
     status: stale
     path: "openspec/specs/login-y-roles/spec.md"

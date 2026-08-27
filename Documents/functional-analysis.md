@@ -1,16 +1,37 @@
 # Análisis funcional — Entrega HH SUC
 
+> ⚠️ **En revisión.** Este documento se redactó cuando el GC01 era fuente de verdad
+> y la Propuesta 1 se daba por adoptada. Hoy el GC01 está deprecado y **ambas
+> propuestas quedaron en igualdad de jerarquía**. Ver
+> [`reporte-impacto-propuestas.md`](reporte-impacto-propuestas.md) antes de usarlo
+> como referencia.
+
 ## 1. Propósito
 
-Definir el primer alcance funcional de una aplicación web de escritorio para registrar entregas de piezas en sucursales, con identificación individual del operador y preparación para futuras integraciones con Office Track, Mosaic, Track & Trace (T&T) y la generación de RDU.
+Definir el primer alcance funcional de una aplicación web para registrar entregas de piezas en sucursales, con identificación individual del operador y preparación para futuras integraciones con Office Track, Track & Trace (T&T) y la generación de RDU.
+
+> **Nota de fuente.** Una versión anterior incluía también a **Mosaic**. Ese sistema
+> aparece únicamente en el GC01, hoy deprecado: ni el documento de propuestas ni el
+> diagrama lo mencionan. No está descartado —el GC01 sí lo declaraba— pero conviene
+> confirmarlo antes de sostenerlo.
 
 Este documento es provisorio. Se utiliza para validar el flujo y las pantallas antes de cerrar reglas de negocio, integraciones y arquitectura definitiva.
 
 ## 2. Decisión de alcance
 
-Se adopta la **propuesta 1**: aplicación web para PC o tablet, operada en línea y con credenciales personales.
+**No hay propuesta adoptada.** Las Propuestas 1 y 2 están en **igualdad de
+jerarquía** y ambas se van a presentar. Este documento describe el alcance del
+**prototipo**, que materializa la Propuesta 1 —calificada por el documento fuente
+como *"la más factible"*— sin que eso implique que esté elegida.
 
-La alternativa basada en usuarios genéricos queda fuera de este prototipo porque no resuelve la trazabilidad individual y agrega riesgos de duplicación y sincronización de tareas.
+Una versión anterior registraba aquí que la alternativa de usuarios genéricos
+quedaba fuera del prototipo por no resolver la trazabilidad individual y agregar
+riesgos de duplicación y sincronización. Ese razonamiento sigue siendo un argumento
+válido —lo sostienen las propias limitantes declaradas de esa alternativa— pero
+**no constituye una decisión tomada**.
+
+Ambas propuestas están documentadas en `propuesta-1-aplicacion-web-nominal.md` y
+`propuesta-2-usuarios-genericos.md`.
 
 ## 3. Referencia del proceso actual
 

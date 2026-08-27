@@ -28,8 +28,8 @@ export default function HubHome() {
               <span className="hub-tag ready">Disponible</span>
             </div>
             <span className="hub-card-icon" aria-hidden="true">🖥️</span>
-            <h3>Prototipo navegable</h3>
-            <p>Maqueta funcional con login, roles (Operador, Administrador, Supervisor), flujo de entrega, historial y administración de usuarios.</p>
+            <h3>Prototipo navegable — Propuesta 1</h3>
+            <p>Maqueta funcional de la Propuesta 1: login con usuario nominal, roles, flujo de entrega, historial y administración de usuarios.</p>
             <span className="hub-card-link">Ver más <span className="arrow">→</span></span>
           </Link>
 
@@ -47,22 +47,22 @@ export default function HubHome() {
           <Link className="hub-card" href="/presentacion">
             <div className="hub-card-top">
               <span className="hub-card-number">03</span>
-              <span className="hub-tag pending">Próximamente</span>
+              <span className="hub-tag ready">Disponible</span>
             </div>
             <span className="hub-card-icon" aria-hidden="true">🎞️</span>
             <h3>Presentación</h3>
-            <p>Recorrido paginado del flujo completo con capturas del prototipo, a modo de instructivo.</p>
+            <p>Recorrido navegable que compara la Propuesta 1 y la Propuesta 2, con diagrama de flujo y ventajas/desventajas.</p>
             <span className="hub-card-link">Ver más <span className="arrow">→</span></span>
           </Link>
 
           <Link className="hub-card" href="/documentacion">
             <div className="hub-card-top">
               <span className="hub-card-number">04</span>
-              <span className="hub-tag pending">Próximamente</span>
+              <span className="hub-tag ready">Disponible</span>
             </div>
             <span className="hub-card-icon" aria-hidden="true">📄</span>
             <h3>Documentación</h3>
-            <p>Análisis funcional, arquitectura provisoria y demás documentos de referencia del proyecto.</p>
+            <p>Las dos propuestas de solución en igualdad de jerarquía, el reporte de impacto, el análisis funcional y la arquitectura provisoria.</p>
             <span className="hub-card-link">Ver más <span className="arrow">→</span></span>
           </Link>
         </section>
