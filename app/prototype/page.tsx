@@ -6,13 +6,7 @@ type Step = 1 | 2 | 3 | 4;
 type DeliveryResult = 'entregada' | 'no-entregada' | '';
 type Page = 'entrega' | 'historial' | 'usuarios' | 'roles';
 
-const HUB_LINKS = [
-  { label: 'Centro del proyecto', href: '/', tag: null as 'actual' | 'pendiente' | null },
-  { label: 'Prototipo navegable', href: '#', tag: 'actual' as 'actual' | 'pendiente' | null },
-  { label: 'Flujo de navegación', href: '/flujo', tag: 'pendiente' as 'actual' | 'pendiente' | null },
-  { label: 'Presentación', href: '/presentacion', tag: 'pendiente' as 'actual' | 'pendiente' | null },
-  { label: 'Documentación', href: '/documentacion', tag: 'pendiente' as 'actual' | 'pendiente' | null },
-];
+type ViewMode = 'desktop' | 'mobile';
 
 const demoPiece = {
   code: 'CP-AR-008741925',
@@ -162,8 +156,10 @@ export default function Home() {
   const [roleModal, setRoleModal] = useState<{ mode: 'create' | 'edit'; id?: string } | null>(null);
   const [roleForm, setRoleForm] = useState(emptyRolForm);
 
-  // --- Navegación hacia el hub ---
+  // --- Panel de tweaks (navegación + casos de uso) ---
   const [hubNavOpen, setHubNavOpen] = useState(false);
+  const [tweaksView, setTweaksView] = useState<'menu' | 'casos'>('menu');
+  const [viewMode, setViewMode] = useState<ViewMode>('desktop');
 
   const currentUser = usuarios.find((u) => u.id === currentUserId) ?? null;
   const currentRole = currentUser ? roles.find((r) => r.id === currentUser.rolId) ?? null : null;
@@ -248,6 +244,7 @@ export default function Home() {
     setLoginUsuario('');
     setLoginPassword('');
     setLoginError('');
+    resetFlow();
   }
 
   function handleLogout() {
@@ -358,31 +355,70 @@ export default function Home() {
     roles: 'Roles y perfiles',
   };
 
+  const usuarioPorRol = (rolId: string) => usuarios.find((u) => u.rolId === rolId && u.estado === 'Activo');
+
   const hubNav = (
     <div className="hub-nav">
-      {hubNavOpen && (
+      {hubNavOpen && tweaksView === 'menu' && (
         <div className="hub-nav-menu" role="menu">
-          <p className="hub-nav-menu-title">Centro del proyecto</p>
-          {HUB_LINKS.map((link) => (
-            <a
-              key={link.label}
-              className={link.tag === 'actual' ? 'hub-nav-item current' : 'hub-nav-item'}
-              href={link.href}
-              onClick={(e) => { if (link.href === '#') e.preventDefault(); }}
-            >
-              <span>{link.label}</span>
-              {link.tag === 'actual' && <span className="hub-nav-tag current">Actual</span>}
-              {link.tag === 'pendiente' && <span className="hub-nav-tag">Próximamente</span>}
-            </a>
-          ))}
+          <p className="hub-nav-menu-title">Panel de prueba</p>
+          <a className="hub-nav-item" href="/">
+            <span>Volver al hub</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <button className="hub-nav-item" type="button" onClick={() => setTweaksView('casos')}>
+            <span>Casos de uso y configuración</span>
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       )}
+
+      {hubNavOpen && tweaksView === 'casos' && (
+        <div className="hub-nav-menu tweaks" role="menu">
+          <button className="tweaks-back" type="button" onClick={() => setTweaksView('menu')}>
+            ← Panel de prueba
+          </button>
+
+          <div className="tweaks-section">
+            <p className="hub-nav-menu-title">Tipo de usuario</p>
+            {roles.map((r) => {
+              const u = usuarioPorRol(r.id);
+              const activo = currentUser?.rolId === r.id;
+              return (
+                <button
+                  key={r.id}
+                  className={activo ? 'tweaks-option active' : 'tweaks-option'}
+                  type="button"
+                  disabled={!u}
+                  onClick={() => u && quickLogin(u)}
+                >
+                  <span>{r.nombre}</span>
+                  {activo && <span className="hub-nav-tag current">Actual</span>}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="tweaks-section">
+            <p className="hub-nav-menu-title">Vista</p>
+            <select
+              value={viewMode}
+              onChange={(e) => setViewMode(e.target.value as ViewMode)}
+              aria-label="Modo de visualización"
+            >
+              <option value="desktop">Escritorio</option>
+              <option value="mobile">Responsive — mobile web app</option>
+            </select>
+          </div>
+        </div>
+      )}
+
       <button
         className="hub-nav-toggle"
         type="button"
-        aria-label="Navegación del hub"
+        aria-label="Panel de prueba"
         aria-expanded={hubNavOpen}
-        onClick={() => setHubNavOpen((v) => !v)}
+        onClick={() => { setHubNavOpen((v) => !v); setTweaksView('menu'); }}
       >
         ⌂
       </button>
@@ -396,7 +432,7 @@ export default function Home() {
       .filter((u): u is Usuario => Boolean(u));
     return (
       <>
-      <main className="login-shell">
+      <main className="login-shell" data-view={viewMode}>
         <section className="panel login-card">
           <div className="brand-mark" aria-hidden="true" style={{ margin: '0 auto 18px' }}>CA</div>
           <p className="eyebrow" style={{ textAlign: 'center' }}>Correo Argentino · Prototipo funcional</p>
@@ -429,7 +465,7 @@ export default function Home() {
 
   return (
     <>
-    <main className="app-shell">
+    <main className="app-shell" data-view={viewMode}>
       <header className="topbar">
         <div className="brand-mark" aria-hidden="true">CA</div>
         <div><p className="eyebrow">Correo Argentino · Prototipo funcional</p><h1>{pageTitles[page]}</h1></div>

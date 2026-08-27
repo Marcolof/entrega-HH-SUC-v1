@@ -1,0 +1,100 @@
+schema_version: "0.1"
+last_updated: "2026-08-26"
+
+project:
+  name: "Entrega HH SUC"
+  client: "Correo Argentino"
+  scenario: evolution
+  local_root: "."
+
+strategy:
+  current_focus: "Panel de prueba incorporado. Falta que el area usuaria valide dispositivo objetivo y rol Supervisor"
+  intervention: reuse-existing
+  recommended_next:
+    - "Llevar a validacion del negocio: dispositivo objetivo (escritorio vs mobile web app) usando el panel de prueba del propio wireframe"
+    - "Hacer visible en el prototipo el valor central del GC01: una sola gestion en lugar de dos sistemas"
+    - "Actualizar la spec openspec login-y-roles: quedo desactualizada por el cambio de rol sin cerrar sesion"
+  deferred:
+    - "Modulos /flujo, /presentacion, /documentacion del Hub (placeholders, sin contenido)"
+    - "Documentar en OpenSpec el flujo de entrega, historial y ABM (solo existe login-y-roles)"
+    - "Reglas de baja de stock, P80 y devolucion: dependen de definicion del negocio"
+
+knowledge:
+  confirmed:
+    - "Se adopto la Propuesta 1: aplicacion web con credenciales personales, en linea, con foto y firma digital"
+    - "Propuesta 1 exige como precondicion ABM de usuarios con asignacion a unidad de negocio y ABM de roles y perfiles: ambos estan implementados en el prototipo"
+    - "El problema de negocio central del GC01 es la falta de trazabilidad (usuario generico) y el doble proceso en dos sistemas"
+    - "Los 6 pasos del proceso de Propuesta 1 estan representados en el prototipo, con T&T/Mosaic y RDU como integraciones simuladas"
+    - "El diagrama de referencia (docs/image.png) esta rotulado PROCESO TENTATIVO, por lo tanto no es fuente autoritativa de reglas de negocio"
+  assumptions:
+    - "El modulo Historial es un agregado del equipo de diseno: no aparece en Propuesta 1 ni en el GC01"
+    - "El ingreso de la pieza se resolvio como codigo manual; Propuesta 1 solo dice 'ingresa la pieza' sin definir el medio"
+    - "El rol Supervisor es una decision de diseno para demostrar permisos configurables, no un requisito de las fuentes. Documentado como tal en functional-analysis.md"
+  open_questions:
+    - "GC01 se titula 'con Dispositivos Moviles' pero Propuesta 1 propone PC o Tablet. Que dispositivo es el objetivo real? El wireframe ahora permite recorrer ambos modos para poder decidirlo con evidencia"
+    - "Confirma el area usuaria el rol Supervisor como tercer rol?"
+    - "Cuando se envia la novedad de baja de stock y cuando no (el diagrama tiene esa bifurcacion, el wireframe no)"
+    - "Que evento habilita una pieza para entrega: P80 u otro estado"
+    - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) no esta modelado en el wireframe"
+
+sources:
+  - type: docx
+    path: "../docs/GC01-Entrega con HH SUC V2 (1).docx"
+    role: "Pedido de cambio formal. Define el problema de negocio, sistemas impactados y prioridad"
+    authority: high
+    date: "2026-07-20"
+  - type: docx
+    path: "../docs/Dos ideas como propuestas  (2).docx"
+    role: "Dos alternativas de solucion. Propuesta 1 es la adoptada"
+    authority: high
+    date: unknown
+  - type: image
+    path: "../docs/image.png"
+    role: "Diagrama del proceso tentativo previo (usuario generico + dispositivo movil)"
+    authority: medium
+    note: "Rotulado PROCESO TENTATIVO: describe el estado previo, no el objetivo"
+  - type: markdown
+    path: "Documents/functional-analysis.md"
+    role: "Analisis funcional elaborado por el equipo a partir de las fuentes anteriores"
+    authority: medium
+    note: "Contiene una contradiccion con el prototipo respecto del rol Supervisor"
+
+capabilities:
+  prototype: "next.js app router en app/prototype"
+  documentation: "Documents/*.md + openspec"
+  openspec-setup: "@fission-ai/openspec"
+  publish: "vercel"
+
+artifacts:
+  hub:
+    status: draft
+    path: "app/page.tsx"
+    note: "4 tarjetas; solo Prototipo navegable tiene contenido real"
+  prototype:
+    status: review
+    fidelity: wireframe
+    path: "app/prototype/page.tsx"
+    note: "Incluye panel de prueba (esquina inferior derecha): volver al hub, cambiar tipo de usuario y alternar escritorio / responsive"
+  documentation:
+    status: draft
+    path: "Documents/"
+  specs:
+    status: stale
+    path: "openspec/specs/login-y-roles/spec.md"
+    note: "Solo cubre login y roles. Quedo desactualizada: no contempla el cambio de rol desde el panel de prueba sin cerrar sesion"
+
+figma:
+  status: none
+  source: none
+  sync: not-required-yet
+
+design_system:
+  status: emerging
+  source: "app/globals.css (tokens en :root)"
+
+delivery:
+  provider: vercel
+  repository: "https://github.com/Marcolof/entrega-HH-SUC-v1"
+  public_url: "https://entrega-hh-suc-v1.vercel.app"
+  status: deployed
+  last_verified: "2026-08-25"

@@ -2,6 +2,21 @@
 
 Proyecto Next.js único (`app/`) que sirve el hub (portada) y sus módulos bajo una sola URL. Ver [`README.md`](README.md) para la estructura completa.
 
+## Documentación funcional
+
+El comportamiento de este producto está documentado como especificaciones en
+`openspec/specs/<area>/spec.md`. Cada archivo describe una parte del producto
+con requisitos (`SHALL`) y escenarios (`WHEN`/`THEN`).
+
+**Antes de implementar o modificar algo, leé la spec del área correspondiente.**
+Si un cambio altera el comportamiento descrito, actualizá la spec (vía un nuevo
+`openspec change`, no editando el spec a mano).
+
+Áreas documentadas:
+- `openspec/specs/login-y-roles/spec.md` — identificación de usuarios, los 3
+  roles del sistema (Operador, Administrador, Supervisor), sus permisos, y cómo
+  esos permisos controlan la navegación y las pantallas visibles.
+
 ## Convenciones
 
 - **Un solo proyecto Next.js**: el hub (`/`) y el prototipo (`/prototype`) viven en el mismo deploy, no en proyectos separados. Evitar volver a separarlos salvo que haya una razón técnica fuerte — ya se intentó con dos deploys de Vercel y generaba confusión de URLs.
@@ -14,11 +29,11 @@ Proyecto Next.js único (`app/`) que sirve el hub (portada) y sus módulos bajo 
 
 - `/prototype`: **en desarrollo activo**, funcional — login por rol, flujo de entrega, historial, ABM de usuarios y roles.
 - `/flujo`, `/presentacion`, `/documentacion`: **placeholders**, sin contenido todavía.
-- `openspec/` (specs formales de comportamiento) todavía no se incorporó a este proyecto.
+- `openspec/specs/login-y-roles/spec.md`: documentado. El resto del prototipo (flujo de entrega, historial, ABM de usuarios/roles) todavía no tiene spec.
 
 ## Pendientes conocidos
 
 - Construir `/flujo` con el diagrama real de pantallas/roles.
 - Construir `/presentacion` con capturas del prototipo.
 - Construir el listado de `/documentacion` a partir de `Documents/*.md`.
-- Decidir si se incorpora `openspec/` para versionar specs de comportamiento.
+- Documentar en `openspec/` el resto del prototipo: flujo de entrega de pieza, historial, ABM de usuarios y ABM de roles.

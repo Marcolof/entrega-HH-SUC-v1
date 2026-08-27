@@ -41,15 +41,24 @@ El nuevo flujo conserva la búsqueda, la confirmación, la actualización de est
 - Administra usuarios.
 - Administra roles y perfiles.
 - Asocia usuarios a sucursales o unidades de negocio.
-- Puede consultar operaciones y trazabilidad.
 
-No se incorpora un tercer rol en esta etapa. Si posteriormente se necesita separar consulta y operación, se evaluará un rol de auditor o supervisor.
+### Supervisor
+
+- Consulta el historial de gestiones de todas las sucursales.
+- No opera entregas ni administra usuarios o roles.
+
+Una versión anterior de este documento indicaba que no se incorporaba un tercer
+rol en esta etapa. El rol Supervisor se sumó al wireframe para poder demostrar
+que los permisos son configurables y que la separación entre *operar* y
+*consultar* es posible sin dar acceso a la administración. Es una decisión del
+equipo de diseño para el prototipo, **no un requisito planteado en el GC01 ni en
+la propuesta 1**: queda sujeto a confirmación del área usuaria.
 
 ## 5. Alcance del wireframe
 
 Incluye:
 
-1. Navegación principal de escritorio.
+1. Navegación principal, adaptable a escritorio y a mobile web app.
 2. Identificación visible del usuario y sucursal.
 3. Búsqueda manual de una pieza.
 4. Visualización de los datos básicos de la pieza.
@@ -61,6 +70,8 @@ Incluye:
 10. Revisión previa.
 11. Confirmación y resultado.
 12. Representación visual de auditoría e integraciones simuladas.
+13. Panel de prueba para cambiar el tipo de usuario y alternar entre vista de
+    escritorio y responsive durante la demostración.
 
 No incluye integraciones reales, persistencia, autenticación real, cámara, firma biométrica, operación offline, impresión ni reglas definitivas de stock o RDU.
 
@@ -122,7 +133,10 @@ No incluye integraciones reales, persistencia, autenticación real, cámara, fir
 
 ## 9. Supuestos provisorios
 
-- La aplicación será web y se usará inicialmente en escritorio.
+- La aplicación será web. La propuesta 1 habla de "PC o Tablet" mientras que el
+  GC01 se titula "con Dispositivos Móviles": el dispositivo objetivo definitivo
+  está pendiente de definición. El wireframe permite recorrer el mismo flujo en
+  modo escritorio y en modo responsive para poder evaluar ambos.
 - La sesión representará un usuario individual, no genérico.
 - El prototipo supone conectividad, aunque la decisión final está pendiente.
 - La pieza de demostración se considera existente, en guarda y disponible.
@@ -145,7 +159,10 @@ No incluye integraciones reales, persistencia, autenticación real, cámara, fir
 - **CA-09:** la confirmación muestra el usuario, resultado y evidencias registradas.
 - **CA-10:** el resultado diferencia auditoría registrada de integraciones simuladas.
 - **CA-11:** puede iniciar una nueva gestión desde la pantalla final.
-- **CA-12:** la interfaz se presenta exclusivamente en escala de grises y está diseñada para escritorio.
+- **CA-12:** la interfaz se presenta exclusivamente en escala de grises.
+- **CA-13:** el prototipo permite recorrer el mismo flujo en modo escritorio y en
+  modo responsive (mobile web app), y cambiar de tipo de usuario, desde un panel
+  de prueba, sin recargar ni volver a iniciar sesión.
 
 ## 11. Aspectos del procedimiento vigente a consultar
 
