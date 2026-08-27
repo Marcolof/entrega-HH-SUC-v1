@@ -434,7 +434,7 @@ export default function Home() {
       <>
       <main className="login-shell" data-view={viewMode}>
         <section className="panel login-card">
-          <div className="brand-mark" aria-hidden="true" style={{ margin: '0 auto 18px' }}>CA</div>
+          <img className="brand-mark" src="/logo-correo-argentino.svg" alt="Correo Argentino" style={{ margin: '0 auto 18px' }} />
           <p className="eyebrow" style={{ textAlign: 'center' }}>Correo Argentino · Prototipo funcional</p>
           <h2 style={{ textAlign: 'center', margin: '4px 0 26px' }}>Entrega en sucursal</h2>
           <form onSubmit={handleLogin}>
@@ -467,7 +467,7 @@ export default function Home() {
     <>
     <main className="app-shell" data-view={viewMode}>
       <header className="topbar">
-        <div className="brand-mark" aria-hidden="true">CA</div>
+        <img className="brand-mark" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
         <div><p className="eyebrow">Correo Argentino · Prototipo funcional</p><h1>{pageTitles[page]}</h1></div>
         <div className="topbar-actions">
           <div className="user-chip">

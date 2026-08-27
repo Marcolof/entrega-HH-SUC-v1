@@ -17,7 +17,7 @@ a { color:inherit; text-decoration:none; }
 .app-shell { min-height:100vh; background:var(--wash); container-type:inline-size; }
 .app-shell[data-view="mobile"], .login-shell[data-view="mobile"] { max-width:430px; margin:0 auto; border-left:1px solid var(--line); border-right:1px solid var(--line); }
 .topbar { height:82px; display:flex; align-items:center; gap:16px; padding:0 28px; border-bottom:2px solid var(--ink); background:var(--paper); }
-.brand-mark { width:44px; height:44px; display:grid; place-items:center; border:2px solid var(--ink); border-radius:50%; font-weight:800; }
+.brand-mark { height:38px; width:auto; display:block; flex-shrink:0; }
 .topbar h1 { margin:2px 0 0; font-size:21px; letter-spacing:-.02em; }
 .eyebrow, .section-number, .nav-label { margin:0; color:var(--muted); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
 .topbar-actions { margin-left:auto; display:flex; align-items:center; gap:24px; }
@@ -213,7 +213,7 @@ button.hub-nav-item { width:100%; border-left:0; border-right:0; border-bottom:0
 /* ===== Hub (portada del proyecto) ===== */
 .hub-shell { min-height:100vh; display:flex; flex-direction:column; }
 .hub-header { display:flex; align-items:center; flex-wrap:wrap; gap:10px 16px; padding:22px 40px; background:var(--paper); border-bottom:1px solid var(--line); }
-.hub-logo { width:46px; height:46px; border-radius:50%; border:2px solid var(--ink); display:grid; place-items:center; font-weight:800; font-size:15px; flex-shrink:0; }
+.hub-logo { height:40px; width:auto; display:block; flex-shrink:0; }
 .hub-header .eyebrow { margin:0; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
 .hub-header h1 { margin:2px 0 0; font-size:20px; letter-spacing:-.01em; }
 .hub-main { flex:1; width:100%; max-width:1080px; margin:0 auto; padding:48px 40px 72px; }

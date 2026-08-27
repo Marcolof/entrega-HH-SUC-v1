@@ -28,7 +28,7 @@ export default async function DocumentoPage({ params }: { params: Promise<{ slug
   return (
     <div className="hub-shell">
       <header className="hub-header">
-        <div className="hub-logo" aria-hidden="true">CA</div>
+        <img className="hub-logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
         <div>
           <p className="eyebrow">Documentación</p>
           <h1>{doc.titulo}</h1>

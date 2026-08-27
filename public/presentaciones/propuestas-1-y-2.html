@@ -97,7 +97,7 @@
   .screen-topbar { flex: 0 0 auto; }
   .screen-topbar__stripe { height: 6px; background: var(--color-brand-dark); }
   .screen-topbar__band { display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 40px; background: var(--color-brand); }
-  .screen-topbar__logo { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--color-brand-dark); font-size: 10px; font-weight: 800; color: var(--color-brand-dark); flex: 0 0 auto; }
+  .screen-topbar__logo { height: 24px; width: auto; display: block; flex: 0 0 auto; }
   .screen-topbar__label { font-size: 1.1875rem; font-weight: 700; color: var(--color-brand-dark); }
 
   .screen-slide-body { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; padding: 26px 40px; overflow-y: auto; }
@@ -231,10 +231,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Objetivo</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Objetivo</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Objetivo de esta presentación</span>
@@ -260,10 +258,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Recorrido</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Recorrido</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Estructura</span>
@@ -296,10 +292,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Situación actual</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Situación actual</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Motivación del cambio</span>
@@ -329,31 +323,26 @@
       </div>
     </section>
 
-    <!-- 7 · PROPUESTA 1: CAPTURA LOGIN -->
+    <!-- 7 · PROPUESTA 1: IDENTIFICACIÓN NOMINAL -->
     <section class="slide screen-slide-wrap">
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Login</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Identificación</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
-      <div class="screen-slide-body">
-        <div class="screen-slide">
-          <div class="screen-text">
-            <span class="slide-eyebrow">Paso 1 · Identificación</span>
+      <div class="plain-body">
+        <span class="slide-eyebrow">Paso 1 · Identificación</span>
+        <div class="obj-grid">
+          <div>
             <h2>Usuario y contraseña nominales</h2>
             <p>El operador ingresa con su cuenta individual, no con un usuario compartido de sucursal.</p>
-            <ul>
-              <li>Cada gestión queda <strong>atribuida a una persona</strong>.</li>
-              <li>Requiere <strong>ABM de usuarios</strong> con unidad de negocio.</li>
-              <li>Requiere <strong>ABM de roles y perfiles</strong>.</li>
-            </ul>
-            <span class="role-tag role-tag--operador">Operador</span>
+            <span class="role-tag role-tag--operador" style="margin-top:20px;">Operador</span>
           </div>
-          <div class="screen-frame-wrap">
-            <div class="screen-frame"><iframe src="/prototype" title="Login del prototipo — Propuesta 1"></iframe></div>
+          <div class="obj-list">
+            <span>Cada gestión queda atribuida a una persona</span>
+            <span>Requiere ABM de usuarios con unidad de negocio</span>
+            <span>Requiere ABM de roles y perfiles</span>
           </div>
         </div>
       </div>
@@ -364,10 +353,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Proceso</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Proceso</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Los 6 pasos de la Propuesta 1</span>
@@ -388,10 +375,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Precondiciones</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Precondiciones</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Qué hace falta antes de operar</span>
@@ -426,10 +411,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Diagrama de flujo</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Diagrama de flujo</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">"El proceso sería el mismo al actual"</span>
@@ -456,10 +439,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Condiciones</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Condiciones</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Sin hardware nuevo, con riesgos propios</span>
@@ -493,10 +474,8 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Ventajas y desventajas</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Ventajas y desventajas</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Cara a cara</span>
@@ -539,16 +518,13 @@
       <div class="screen-topbar">
         <div class="screen-topbar__stripe"></div>
         <div class="screen-topbar__band">
-          <span class="screen-topbar__logo">CA</span>
-          <span class="screen-topbar__label">Preguntas abiertas</span>
-          <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a>
-        </div>
+          <img class="screen-topbar__logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
+          <span class="screen-topbar__label">Preguntas abiertas</span>        <a class="slide-back slide-back--band" href="/"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Volver al hub</a></div>
       </div>
       <div class="plain-body">
         <span class="slide-eyebrow">Lo que todavía no está resuelto</span>
         <h2>Qué falta definir antes de decidir</h2>
         <div class="steps-row">
-          <div class="step-card"><b>?</b><strong>Asimetría</strong><p>La Propuesta 1 tiene prototipo navegable; la 2 solo existe en papel.</p></div>
           <div class="step-card"><b>?</b><strong>Mosaic</strong><p>Solo lo sostiene el documento deprecado.</p></div>
           <div class="step-card"><b>?</b><strong>Historial y Supervisor</strong><p>Ninguna propuesta los menciona.</p></div>
           <div class="step-card"><b>?</b><strong>Baja de stock</strong><p>Cuándo se envía la novedad y cuándo no.</p></div>
@@ -564,7 +540,7 @@
       <div class="cover-slide__content">
         <span class="cover-eyebrow">Cierre</span>
         <h1 class="cover-title">Dos propuestas, una decisión pendiente</h1>
-        <p class="cover-subtitle">La Propuesta 1 ya tiene un prototipo navegable. La Propuesta 2 tiene el proceso mejor documentado. Ninguna está descartada.</p>
+        <p class="cover-subtitle">Ambas propuestas siguen en evaluación, en igualdad de condiciones. Ninguna está descartada.</p>
         <div class="crumb">
           <span>Entrega HH SUC</span><span class="crumb-sep">›</span>
           <span>Correo Argentino</span>

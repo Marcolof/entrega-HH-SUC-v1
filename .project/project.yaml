@@ -22,6 +22,10 @@ strategy:
 
 knowledge:
   confirmed:
+    - "DECISION (superior, 2026-08-27): la Presentacion no debe revelar al cliente que ya existe un prototipo navegable. Se elimino toda mencion a 'prototipo'/'wireframe' del HTML y del PPTX (mockup de login, tarjeta 'Asimetria', texto de cierre). El boton 'Volver al hub' se mantiene en el HTML (uso interno, se omite naturalmente al exportar a PPTX)"
+    - "El logo real de Correo Argentino (assets/logo correo argentino.svg, tambien en public/) reemplazo todos los badges placeholder 'CA' en el Hub, prototipo y HTML de presentacion. Pendiente en el PPTX: este entorno no tiene herramienta de rasterizacion SVG->PNG (sharp/canvas/resvg/puppeteer ausentes, npm install sin registry); el PPTX conserva el badge circular 'CA' dibujado por pptxgenjs"
+    - "GLOSARIO (usuario, 2026-08-27): T&T = listado de eventos de la pieza/envio + forma de seguimiento (usuario no conoce el detalle interno). Mosaic = sistema de punto de venta VIEJO, la sucursal carga ahi los eventos que recibe via T&T. P80 = un evento de T&T. Ver Documents/glosario-dominio.md"
+    - "Mosaic es un sistema real y vigente (ya no depende solo del GC01 deprecado). Pero esto NO confirma que HH SUC pueda integrarse con el - ver open_questions, es bloqueante de arquitectura"
     - "DECISION: Propuestas 1 y 2 quedan en igualdad de jerarquia. Ninguna esta descartada y ambas se presentan"
     - "El GC01 esta deprecado, no eliminado: no se derivan requisitos de el, pero se consulta para explicar huecos de P1 y P2"
     - "El prototipo es la Propuesta 1 materializada: cobertura completa de sus 6 pasos y sus 2 precondiciones"
@@ -34,8 +38,12 @@ knowledge:
     - "El ingreso de la pieza se resolvio como codigo manual; la fuente no define el medio"
     - "El rol Supervisor es una decision de diseno, no un requisito de las fuentes"
   open_questions:
+    - "BLOQUEANTE DE ARQUITECTURA: puede la solucion HH SUC comunicarse con Mosaic? El analista del cliente no lo dejo claro. No es un detalle de redaccion, condiciona el diseno de integraciones"
     - "Asimetria de materializacion: P1 tiene prototipo navegable y P2 solo documento. Presentarlas como iguales inclina la decision por disponibilidad, no por merito. Se equilibra en la Presentacion?"
-    - "Se confirma o se retira la mencion a Mosaic en el prototipo?"
+    - "HH: es el dispositivo, el tipo de evento, o ambos? (usuario no esta seguro)"
+    - "Que significa 'palabra clave / operador RMS' en la carga de eventos a Mosaic?"
+    - "'Dispositivos' = hardware, o 'cualquier cosa que llega a una sucursal' (items/envios)? Hipotesis del usuario sin verificar"
+    - "La foto de DNI en el formulario de Office Core aplica a este proyecto, o es de otro proceso? (usuario no esta seguro)"
     - "Historial y Supervisor quedan dentro del alcance aceptado? Ninguna propuesta los menciona"
     - "Cuando se envia la novedad de baja de stock y cuando no (bifurcacion del diagrama, aplica a P2)"
     - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) entra en el alcance de alguna propuesta?"
@@ -62,6 +70,12 @@ sources:
     path: "Documents/functional-analysis.md"
     role: "Analisis funcional del equipo. En revision tras el reencuadre de fuentes"
     authority: medium
+  - type: chat-notes
+    path: "Documents/glosario-dominio.md"
+    role: "Conocimiento de dominio del usuario (T&T, HH, P80, Mosaic, Office Core), transmitido en chat, no documento formal del cliente"
+    authority: medium
+    date: "2026-08-27"
+    note: "Confirma Mosaic de forma independiente al GC01 deprecado. Incompleto: listado de dispositivos y listado de eventos quedaron a medio escribir"
 
 capabilities:
   prototype: "next.js app router en app/prototype"

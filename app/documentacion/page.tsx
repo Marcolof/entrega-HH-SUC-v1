@@ -9,7 +9,7 @@ export default function DocumentacionPage() {
   return (
     <div className="hub-shell">
       <header className="hub-header">
-        <div className="hub-logo" aria-hidden="true">CA</div>
+        <img className="hub-logo" src="/logo-correo-argentino.svg" alt="Correo Argentino" />
         <div>
           <p className="eyebrow">Correo Argentino</p>
           <h1>Documentación</h1>
