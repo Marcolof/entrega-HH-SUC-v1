@@ -6,6 +6,7 @@ project:
   client: "Correo Argentino"
   scenario: evolution
   local_root: "."
+  constraint: "Todo el proyecto (codigo, docs fuente, documentacion generada) vive dentro de esta carpeta. Es la unica que se sube a GitHub. docs/ se movio para adentro el 2026-08-27, antes vivia como hermana fuera del repo"
 
 strategy:
   current_focus: "Hub con 3 de 4 modulos disponibles: prototipo, documentacion y presentacion. Falta /flujo"
@@ -41,18 +42,18 @@ knowledge:
 
 sources:
   - type: docx
-    path: "../docs/Dos ideas como propuestas  (2).docx"
+    path: "docs/Dos ideas como propuestas  (2).docx"
     role: "FUENTE DE VERDAD PRINCIPAL. Dos alternativas de solucion"
     authority: high
     date: unknown
     note: "No es neutral: califica a Propuesta 1 como 'la mas factible', le da beneficios y ninguna limitante; a Propuesta 2 le da seis limitantes y ningun beneficio"
   - type: image
-    path: "../docs/image.png"
+    path: "docs/image.png"
     role: "FUENTE DE VERDAD. Diagrama del proceso tentativo. Funciona como vista de proceso de la Propuesta 2"
     authority: high
     note: "Rotulado PROCESO TENTATIVO: sus ramas son intencion de proceso, no reglas confirmadas"
   - type: docx
-    path: "../docs/GC01-Entrega con HH SUC V2 (1).docx"
+    path: "docs/GC01-Entrega con HH SUC V2 (1).docx"
     role: "DEPRECADO, no eliminado. Etapa inicial del proceso. No se usa para derivar requisitos, pero se consulta para explicar huecos de P1 y P2"
     authority: deprecated
     date: "2026-07-20"
