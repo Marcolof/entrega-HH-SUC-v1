@@ -1,5 +1,5 @@
 schema_version: "0.1"
-last_updated: "2026-08-27"
+last_updated: "2026-09-17"
 
 project:
   name: "Entrega HH SUC"
@@ -9,12 +9,13 @@ project:
   constraint: "Todo el proyecto (codigo, docs fuente, documentacion generada) vive dentro de esta carpeta. Es la unica que se sube a GitHub. docs/ se movio para adentro el 2026-08-27, antes vivia como hermana fuera del repo"
 
 strategy:
-  current_focus: "Hub con 3 de 4 modulos disponibles: prototipo, documentacion y presentacion. Falta /flujo"
+  current_focus: "Reencuadre a PROPUESTA UNICA (2026-09-17). Presentacion ya migrada; documentacion todavia habla de P1 y P2"
   intervention: reuse-existing
   recommended_next:
-    - "Resolver la mencion a Mosaic en el prototipo (solo la sostiene el GC01 deprecado)"
+    - "Migrar la documentacion a propuesta unica: retirar Documents/propuesta-2-usuarios-genericos.md, reescribir propuesta-1 como 'la propuesta', reencuadrar reporte-impacto y functional-analysis, actualizar app/documentacion/docs.ts y la tarjeta 04 del Hub (hoy dice 'las dos propuestas en igualdad de jerarquia', sigue siendo cierto hasta que se migre)"
+    - "Agregar ISO/IEC 27001 (ABM de usuarios y roles) tambien en la documentacion, como esta en la Presentacion"
+    - "Regenerar el PPTX desde el deck nuevo de 14 slides (el actual sigue siendo el de 16 slides con P1 vs P2)"
     - "Construir /flujo con el diagrama real de pantallas/roles (unico modulo pendiente del Hub)"
-    - "Definir si la asimetria P1-con-prototipo / P2-sin-prototipo se resuelve construyendo un prototipo de P2, o se deja explicita como esta"
   deferred:
     - "Modulo /flujo del Hub (placeholder, sin contenido)"
     - "Documentar en OpenSpec el flujo de entrega, historial y ABM (solo existe login-y-roles)"
@@ -26,7 +27,9 @@ knowledge:
     - "El logo real de Correo Argentino (assets/logo correo argentino.svg, tambien en public/) reemplazo todos los badges placeholder 'CA' en el Hub, prototipo y HTML de presentacion. Pendiente en el PPTX: este entorno no tiene herramienta de rasterizacion SVG->PNG (sharp/canvas/resvg/puppeteer ausentes, npm install sin registry); el PPTX conserva el badge circular 'CA' dibujado por pptxgenjs"
     - "GLOSARIO (usuario, 2026-08-27): T&T = listado de eventos de la pieza/envio + forma de seguimiento (usuario no conoce el detalle interno). Mosaic = sistema de punto de venta VIEJO, la sucursal carga ahi los eventos que recibe via T&T. P80 = un evento de T&T. Ver Documents/glosario-dominio.md"
     - "Mosaic es un sistema real y vigente (ya no depende solo del GC01 deprecado). Pero esto NO confirma que HH SUC pueda integrarse con el - ver open_questions, es bloqueante de arquitectura"
-    - "DECISION: Propuestas 1 y 2 quedan en igualdad de jerarquia. Ninguna esta descartada y ambas se presentan"
+    - "DECISION (2026-09-17, deroga la de igualdad de jerarquia): queda UNA SOLA PROPUESTA, la ex Propuesta 1 (app web con usuario nominal). Ya no se habla de v1/v2 ni de 'Propuesta 1': es 'la propuesta'. La ex Propuesta 2 sale de la narrativa"
+    - "DECISION (2026-09-17): la Presentacion no menciona ningun punto a definir, contradiccion ni hueco. Se elimino el slide 'Preguntas abiertas' y la cita al documento deprecado. Todo eso va en la Documentacion, que es el artefacto donde vive lo no resuelto"
+    - "DECISION (2026-09-17): el ABM de usuarios y roles se presenta como cumpliendo la norma ISO/IEC 27001. Numero de norma verificado: ISO/IEC 27001 es el estandar certificable de gestion de seguridad de la informacion (SGSI). Controles de gestion de accesos del Anexo A (version 2022): A.5.15 control de acceso, A.5.16 gestion de identidad (identidad unica, nunca compartida), A.5.17 informacion de autenticacion, A.5.18 derechos de acceso. A.5.16 es el que respalda directamente el usuario nominal contra el generico compartido"
     - "El GC01 esta deprecado, no eliminado: no se derivan requisitos de el, pero se consulta para explicar huecos de P1 y P2"
     - "El prototipo es la Propuesta 1 materializada: cobertura completa de sus 6 pasos y sus 2 precondiciones"
     - "Propuesta 1 exige como precondicion ABM de usuarios con asignacion a unidad de negocio y ABM de roles y perfiles: ambos estan implementados"
@@ -39,14 +42,14 @@ knowledge:
     - "El rol Supervisor es una decision de diseno, no un requisito de las fuentes"
   open_questions:
     - "BLOQUEANTE DE ARQUITECTURA: puede la solucion HH SUC comunicarse con Mosaic? El analista del cliente no lo dejo claro. No es un detalle de redaccion, condiciona el diseno de integraciones"
-    - "Asimetria de materializacion: P1 tiene prototipo navegable y P2 solo documento. Presentarlas como iguales inclina la decision por disponibilidad, no por merito. Se equilibra en la Presentacion?"
+    - "Falla de integracion post-confirmacion: que ocurre si falla despues de confirmar la entrega. Limitante declarada por la fuente para esta propuesta, sin resolucion definida"
     - "HH: es el dispositivo, el tipo de evento, o ambos? (usuario no esta seguro)"
     - "Que significa 'palabra clave / operador RMS' en la carga de eventos a Mosaic?"
     - "'Dispositivos' = hardware, o 'cualquier cosa que llega a una sucursal' (items/envios)? Hipotesis del usuario sin verificar"
     - "La foto de DNI en el formulario de Office Core aplica a este proyecto, o es de otro proceso? (usuario no esta seguro)"
-    - "Historial y Supervisor quedan dentro del alcance aceptado? Ninguna propuesta los menciona"
-    - "Cuando se envia la novedad de baja de stock y cuando no (bifurcacion del diagrama, aplica a P2)"
-    - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) entra en el alcance de alguna propuesta?"
+    - "Historial y Supervisor quedan dentro del alcance aceptado? La propuesta no los menciona"
+    - "Cuando se envia la novedad de baja de stock y cuando no (bifurcacion del diagrama del proceso)"
+    - "Circuito de devolucion (MOTIVOS DEVOLUCION -> BAJA OFFICE CORE) entra en el alcance de la propuesta?"
 
 sources:
   - type: docx
@@ -87,27 +90,37 @@ artifacts:
   hub:
     status: review
     path: "app/page.tsx"
-    note: "4 tarjetas; Prototipo (Propuesta 1), Documentacion y Presentacion disponibles. Solo Flujo sigue placeholder"
+    note: "4 tarjetas. Tarjetas 01 (Prototipo) y 03 (Presentacion) ya migradas a propuesta unica. La 04 (Documentacion) todavia dice 'las dos propuestas en igualdad de jerarquia' porque los .md siguen asi: se actualiza cuando se migre documentacion. Solo Flujo sigue placeholder"
   presentation:
-    status: review
-    path: "app/presentacion/ (selector Next.js) + public/presentaciones/propuestas-1-y-2.html (deck autocontenido)"
-    note: "16 slides, estilo propio (navy #152663 / amarillo #FFCE00 / Ubuntu) extraido del pptx de referencia del usuario. Captura del login via iframe en vivo a /prototype (no screenshot estatico). Selector preparado para futuras presentaciones"
+    status: current
+    path: "app/presentacion/ (selector Next.js) + public/presentaciones/propuesta-entrega-hh-suc.html (deck autocontenido)"
+    note: "13 slides, propuesta unica, verificado en localhost 2026-09-17. Estilo navy #152663 / amarillo #FFCE00 / Ubuntu. Sin capturas ni iframes (decision de no revelar el prototipo al cliente). Incluye slide 10 dedicado a ABM de usuarios y roles segun ISO/IEC 27001 con los controles A.5.15-A.5.18. El deck anterior propuestas-1-y-2.html se elimino (recuperable en commit 17c2349)"
   prototype:
     status: review
     fidelity: wireframe
     path: "app/prototype/page.tsx"
     note: "Incluye panel de prueba (esquina inferior derecha): volver al hub, cambiar tipo de usuario y alternar escritorio / responsive"
   documentation:
-    status: review
+    status: stale
     path: "Documents/"
-    note: "Propuestas 1 y 2 + reporte de impacto, navegables en /documentacion (renderizado desde los .md)"
+    note: "DESACTUALIZADA tras la decision de propuesta unica del 2026-09-17: sigue documentando P1 y P2 en igualdad y no menciona ISO/IEC 27001. Es el proximo trabajo pendiente"
   proposals:
-    status: review
+    status: stale
     path: "Documents/propuesta-1-aplicacion-web-nominal.md, Documents/propuesta-2-usuarios-genericos.md"
     sources: "docs/Dos ideas como propuestas (2).docx, docs/image.png"
+    note: "propuesta-2 debe retirarse y propuesta-1 pasar a ser 'la propuesta'"
   impact_report:
-    status: review
+    status: stale
     path: "Documents/reporte-impacto-propuestas.md"
+    note: "Su tesis central es comparar las dos propuestas: hay que reencuadrarlo o retirarlo"
+  presentation_pptx:
+    status: current
+    path: "Documents/Propuesta-Entrega-HH-SUC.pptx"
+    note: "13 slides, espejo exacto del deck HTML, verificado por extraccion de texto del XML el 2026-09-17. Se regenera a pedido, no en cada cambio (pedido explicito del usuario). Generador en scratchpad/pptxgen/build.js + logo.png (copia de 'public/presentaciones/assets presentations/Logo presentacion.png'). El anterior Propuesta-1-vs-Propuesta-2.pptx se elimino: el nombre del archivo por si solo filtraba la existencia de una segunda alternativa"
+  status_report:
+    status: current
+    path: "Documents/reporte-estado-propuesta-unica.md"
+    note: "Reporte para analistas: contradicciones, riesgos, 12 puntos abiertos y mejoras. INTERNO A PROPOSITO: no esta registrado en app/documentacion/docs.ts, por lo que no se publica en /documentacion"
   specs:
     status: stale
     path: "openspec/specs/login-y-roles/spec.md"

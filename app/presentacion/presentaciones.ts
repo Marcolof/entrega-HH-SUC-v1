@@ -11,12 +11,12 @@ export type PresentacionMeta = {
    Este archivo solo registra metadata para el selector; el contenido vive en el .html. */
 export const PRESENTACIONES: PresentacionMeta[] = [
   {
-    slug: 'propuestas-1-y-2',
-    archivo: '/presentaciones/propuestas-1-y-2.html',
-    titulo: 'Propuesta 1 vs. Propuesta 2',
+    slug: 'propuesta-entrega-hh-suc',
+    archivo: '/presentaciones/propuesta-entrega-hh-suc.html',
+    titulo: 'Entrega de piezas en sucursal — La propuesta',
     descripcion:
-      'Recorrido comparativo de las dos propuestas de solución: aplicación web con usuario nominal vs. usuarios genéricos múltiples. Incluye diagrama de flujo y comparación de ventajas y desventajas.',
-    slides: 16,
-    fecha: '2026-08-27',
+      'Recorrido de la propuesta de solución: aplicación web con identificación nominal del operador, los 6 pasos del proceso, precondiciones y control de accesos según ISO/IEC 27001, con la comparación frente a la operación actual.',
+    slides: 13,
+    fecha: '2026-09-17',
   },
 ];

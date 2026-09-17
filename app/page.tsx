@@ -28,8 +28,8 @@ export default function HubHome() {
               <span className="hub-tag ready">Disponible</span>
             </div>
             <span className="hub-card-icon" aria-hidden="true">🖥️</span>
-            <h3>Prototipo navegable — Propuesta 1</h3>
-            <p>Maqueta funcional de la Propuesta 1: login con usuario nominal, roles, flujo de entrega, historial y administración de usuarios.</p>
+            <h3>Prototipo navegable</h3>
+            <p>Maqueta funcional de la propuesta: login con usuario nominal, roles, flujo de entrega, historial y administración de usuarios.</p>
             <span className="hub-card-link">Ver más <span className="arrow">→</span></span>
           </Link>
 
@@ -51,7 +51,7 @@ export default function HubHome() {
             </div>
             <span className="hub-card-icon" aria-hidden="true">🎞️</span>
             <h3>Presentación</h3>
-            <p>Recorrido navegable que compara la Propuesta 1 y la Propuesta 2, con diagrama de flujo y ventajas/desventajas.</p>
+            <p>Recorrido navegable de la propuesta: identificación nominal, los 6 pasos del proceso, control de accesos ISO/IEC 27001 y qué cambia respecto de hoy.</p>
             <span className="hub-card-link">Ver más <span className="arrow">→</span></span>
           </Link>
 
